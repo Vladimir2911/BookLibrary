@@ -1,0 +1,52 @@
+﻿@using BookLibrary.Data.Models
+@model Book
+
+@using (Html.BeginForm("Edit", "Book", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Book</h4>
+        @Html.ValidationSummary(true)
+
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title)
+
+        @Html.LabelFor(m => m.Author)
+        @Html.TextBoxFor(m => m.Author)
+
+        @Html.LabelFor(m => m.PublishYear)
+        @Html.TextBoxFor(m => m.PublishYear)
+
+
+        @Html.LabelFor(m => m.Summary)
+        @Html.TextAreaFor(m => m.Summary)
+
+        <label>Table of contents</label>
+        <textarea id="Contents" name="Contents" rows="10" cols="80">@Model.Contents.ToString()</textarea>
+
+        <br />
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+}
+
+@section Scripts {     
+    <script src="https://cdn.tiny.cloud/1/pbqiz8f8ciy50upitvq50eso05txanznsl0fhuuc1eu4vf5z/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+        <<script>           
+                 tinymce.init({
+                     selector: 'textarea.tinymce-editor',
+                     plugins: 'lists',
+                     toolbar: 'undo redo | bold italic | bullist numlist',
+                     menubar: false,
+                     statusbar: false,
+                     branding: false,
+                     forced_root_block: false,
+                     setup: function (editor) {
+                         editor.on('init', function () {                            
+                             editor.setMode('design');
+                             console.log('TinyMCE initialized successfully');
+                         });
+                     }
+               
+             });
+    </script>
+}

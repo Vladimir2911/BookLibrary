@@ -1,0 +1,23 @@
+﻿@using BookLibrary.Data.Models
+@using System.Xml.Linq
+
+@model Book
+
+<h2>Book details</h2>
+<p><strong>Name:</strong> @Model.Title</p>
+<p><strong>Author:</strong> @Model.Author</p>
+<p><strong>Year:</strong> @Model.PublishYear</p>
+<p><strong>Summary:</strong> @Model.Summary</p>
+
+<h3>Table of content</h3>
+<ul>
+    @foreach (var line in Model.Contents.Split('\n'))
+    {
+        <li>@line</li>
+    }
+</ul>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to list of books", "Index")
+</p>

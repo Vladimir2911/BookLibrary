@@ -1,0 +1,51 @@
+﻿@using BookLibrary.Data.Models
+@model Book
+
+@using (Html.BeginForm("Create", "Book", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Book</h4>
+        @Html.ValidationSummary(true)
+
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title)
+
+        @Html.LabelFor(m => m.Author)
+        @Html.TextBoxFor(m => m.Author)
+
+        @Html.LabelFor(m => m.PublishYear)
+        @Html.TextBoxFor(m => m.PublishYear)
+
+
+        @Html.LabelFor(m => m.Summary)
+        @Html.TextAreaFor(m => m.Summary)
+
+        <label>Table of contents</label>
+        <textarea id="ContentsEditor" name="Contents" rows="10" cols="80">@Model.Contents</textarea>
+
+        <br />
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+}
+@section Scripts {
+    <script src="https://cdn.tiny.cloud/1/pbqiz8f8ciy50upitvq50eso05txanznsl0fhuuc1eu4vf5z/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        <script>
+        tinymce.init({
+            selector: '#xmlEditor',
+            plugins: 'code xml',
+            toolbar: 'undo redo | styles | code | xml',
+            menubar: 'edit view code',
+            height: 500,
+            content_style: 'body { font-family: monospace; font-size: 14px }',
+            setup: function(editor) {
+              
+                editor.on('init', function() {
+                    editor.getDoc().designMode = 'on';
+                });
+            }
+        });
+
+    </script>
+}

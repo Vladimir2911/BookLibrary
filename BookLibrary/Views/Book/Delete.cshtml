@@ -1,0 +1,21 @@
+﻿@model BookLibrary.Data.Models.Book
+
+@{
+    ViewBag.Title = "Удалить книгу";
+}
+
+<h2>Удалить книгу</h2>
+<h3>Удалить книгу?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Название</dt>
+        <dd>@Model.Title</dd>
+    </dl>
+</div>
+@using (Html.BeginForm("DeleteConfirmed", "Book", new { id = Model.Id }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Удалить" class="btn btn-danger" />
+
+    @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-default" })
+}

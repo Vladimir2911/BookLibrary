@@ -1,0 +1,26 @@
+﻿@using BookLibrary.Data.Models
+@model IEnumerable<Book>
+
+<h2>Книги</h2>
+<p>@Html.ActionLink("Add", "Create")</p>
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Author</td>
+            <td>@item.PublishYear</td>
+            <td>
+                @Html.ActionLink("View", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Remove", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
